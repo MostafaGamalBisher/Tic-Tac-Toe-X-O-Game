@@ -1,0 +1,15 @@
+making the GUI 
+
+initlazing the mean window 
+set the project/window name
+set the size of the window 
+
+make the scoreboard label 
+place it in the window - in the top of the window
+
+make the restart button
+place it in the window - in the buttom of the scoreboard
+make the button farme and place it
+make the 3x3 grid bttons (play area) - array []
+
+
