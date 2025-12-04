@@ -70,5 +70,3 @@ Mostafa Gamal Bisher
 Built as a practice project combining GUI, AI, and game design.
 
 ⭐ If you like this project, consider giving it a Star!
-yaml
-نسخ الكود
