@@ -24,7 +24,7 @@ humanScore = 0
 computerScore = 0
 drawScore = 0
 
-def reset_scoreboard():
+def reset_scoreboard(): #reset the scores
     global humanScore, computerScore, drawScore
     humanScore = 0
     computerScore = 0
@@ -35,24 +35,24 @@ def reset_scoreboard():
     resultlabel.config(text="--", fg="yellow")
 
 
-def restart_game():
+def restart_game():  #restart the game
     global board
     board = [""] * 9
     for button in buttons:
         button.config(text="", state="normal")
     resultlabel.config(text="--", fg="yellow")
     
-def check_winner(player):
+def check_winner(player):  #check if the player has won
     for a, b, c in winning_combos:
         if board[a] == board[b] == board[c] == player:
             return True
     return False
 
-def disable_all_buttons():
+def disable_all_buttons():  #disable all buttons when game ends
     for b in buttons:
         b.config(state="disabled")
 
-def find_best_spot(player):
+def find_best_spot(player):   #find winning or blocking move use it in computer_move
     for a, b, c in winning_combos:
         if board[a] == board[b] == player and board[c] == "":
             return c
@@ -62,7 +62,7 @@ def find_best_spot(player):
             return a
     return None
 
-def computer_move():
+def computer_move():  #computer move logic
     spot = find_best_spot("o")
     if spot is not None:
         buttons[spot].config(text="o", state="disabled")
@@ -92,7 +92,7 @@ def computer_move():
             return 
     return
 
-def player_move(b):
+def player_move(b):   #player move logic
     global humanScore, computerScore, drawScore
     index = buttons.index(b)
     playermove = b.config(text=human, state="disabled")
