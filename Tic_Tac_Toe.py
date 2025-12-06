@@ -32,15 +32,15 @@ def reset_scoreboard(): #reset the scores
     humanscorelabel.config(text="Human = 0")
     computerscorelabel.config(text="Computer = 0")
     drawscorelabel.config(text="Draw = 0")
-    resultlabel.config(text="--", fg="yellow")
+    resultlabel.config(text="", fg="yellow")
 
 
 def restart_game():  #restart the game
     global board
     board = [""] * 9
     for button in buttons:
-        button.config(text="", state="normal")
-    resultlabel.config(text="--", fg="yellow")
+        button.config(text="", state="normal", bg="SystemButtonFace")
+    resultlabel.config(text="", fg="yellow")
     
 def check_winner(player):  #check if the player has won
     for a, b, c in winning_combos:
@@ -61,6 +61,16 @@ def find_best_spot(player):   #find winning or blocking move use it in computer_
         if board[b] == board[c] == player and board[a] == "":
             return a
     return None
+
+def highlight_winner(player, color): #highlight winning combination
+   
+    for a, b, c in winning_combos:
+        if board[a] == board[b] == board[c] == player:
+            buttons[a].config(bg=color)
+            buttons[b].config(bg=color)
+            buttons[c].config(bg=color)
+            return
+
 
 def computer_move():  #computer move logic
     spot = find_best_spot("o")
@@ -102,12 +112,15 @@ def player_move(b):   #player move logic
         humanScore += 1
         humanscorelabel.config(text=f"Human = {humanScore}")
         resultlabel.config(text="You Win!", fg="green")
+        highlight_winner(human, "#66ff66")
         disable_all_buttons()
         return
     elif "" not in board:
         drawScore += 1
         drawscorelabel.config(text=f"Draw = {drawScore}")
         resultlabel.config(text="It's a Draw!", fg="yellow")
+        for btn in buttons:
+            btn.config(bg="#ffff99")
         disable_all_buttons()
         return
     else:
@@ -117,6 +130,7 @@ def player_move(b):   #player move logic
             computerScore += 1
             computerscorelabel.config(text=f"Computer = {computerScore}")
             resultlabel.config(text="Computer Wins!", fg="red")
+            highlight_winner(computer, "#ff6666")
             disable_all_buttons()
             return
             
@@ -124,6 +138,8 @@ def player_move(b):   #player move logic
             drawScore += 1
             drawscorelabel.config(text=f"Draw = {drawScore}")
             resultlabel.config(text="It's a Draw!", fg="yellow")
+            for btn in buttons:
+                btn.config(bg="#ffff99")
             disable_all_buttons()
             return
 
@@ -180,7 +196,7 @@ resetscorebutton = tk.Button(controlframe, text="Reset Scoreboard", font=("fixed
 resetscorebutton.grid(row=0, column=1, padx=10)
 
 # result label 
-resultlabel = tk.Label(window, text="--", font=("fixedsys", 16), fg="yellow", bg="black"
+resultlabel = tk.Label(window, text="", font=("fixedsys", 16), fg="yellow", bg="black"
                        )
 resultlabel.pack(pady=10) 
 
